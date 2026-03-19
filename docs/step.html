@@ -283,7 +283,7 @@
         }
 
         async function copyTextToClipboard(text) {
-            if (navigator.clipboard?.writeText && window.isSecureContext) {
+            if (navigator.clipboard?.writeText) {
                 await navigator.clipboard.writeText(text);
                 return;
             }
@@ -318,7 +318,7 @@
                 button.textContent = 'Copy';
                 button.setAttribute('aria-label', 'Copy code block');
 
-                let resetTimeout;
+                let resetTimeoutId;
                 button.addEventListener('click', async () => {
                     try {
                         await copyTextToClipboard(code.textContent ?? '');
@@ -329,8 +329,8 @@
                         button.classList.add('failed');
                     }
 
-                    clearTimeout(resetTimeout);
-                    resetTimeout = setTimeout(() => {
+                    clearTimeout(resetTimeoutId);
+                    resetTimeoutId = setTimeout(() => {
                         button.textContent = 'Copy';
                         button.classList.remove('copied', 'failed');
                     }, 1600);
