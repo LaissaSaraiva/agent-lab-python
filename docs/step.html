@@ -318,7 +318,7 @@
                 button.textContent = 'Copy';
                 button.setAttribute('aria-label', 'Copy code block');
 
-                let resetTimeoutId;
+                let resetTimeoutId = null;
                 button.addEventListener('click', async () => {
                     try {
                         await copyTextToClipboard(code.textContent ?? '');
